@@ -8,7 +8,10 @@ public class Principal {
         var principal = new Principal();
         List<Avenida> avenidas = principal.inicializaDadosAvenidas();
         var engarrafamento = new Engarrafamento(avenidas);
-        System.out.println("As avenidas por engarrafamento são " + engarrafamento.determinaAvenidaPorEngarrafamento().toString());
+        List<String> congestionamentos = engarrafamento.determinaAvenidaPorEngarrafamento();
+        System.out.println("As avenidas por engarrafamento são: \n");
+
+        congestionamentos.forEach(System.out::println);
     }
 
     public List<Avenida> inicializaDadosAvenidas() {

@@ -15,19 +15,14 @@ public class Engarrafamento {
         return engarrafamento / avenida.getTamanho();
     }
 
-   /* public List<Avenida> determinaAvenidaPorEngarrafamento() {
-        return avenidas.stream()
-                .sorted((avenida1, avenida2) -> {
-                    var engarrafamentoAvenida1 = calculaEngarrafamentos(avenida1);
-                    var engarrafamentoAvenida2 = calculaEngarrafamentos(avenida2);
-                    return Double.compare(engarrafamentoAvenida2, engarrafamentoAvenida1);
-                }).collect(Collectors.toList());
-    } */
-
     public List<String> determinaAvenidaPorEngarrafamento() {
         return avenidas.stream()
                 .sorted(Comparator.comparingDouble(this::calculaEngarrafamentos))
-                .map(Avenida::getNome)
+                .map(avenida -> {
+                    double congestionamento = calculaEngarrafamentos(avenida);
+                    return "" + avenida.getNome() + " " + (int) congestionamento;
+                }
+                )
                 .collect(Collectors.toList());
     }
 }
